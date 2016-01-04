@@ -7,13 +7,14 @@
 //
 
 #import "ViewController.h"
+#import "HeroCollectionViewCell.h"
 
 NSInteger const kNumberOfCells = 10;
 NSString *const cellId = @"collectionCellReuseId";
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *pictures;
+@property (nonatomic, strong) NSMutableArray *picturesArray;
 @end
 
 @implementation ViewController 
@@ -21,7 +22,7 @@ NSString *const cellId = @"collectionCellReuseId";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if (!self.pictures) self.pictures = [NSMutableArray arrayWithCapacity:kNumberOfCells];
+    if (!self.picturesArray) self.picturesArray = [NSMutableArray arrayWithCapacity:kNumberOfCells];
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -31,8 +32,8 @@ NSString *const cellId = @"collectionCellReuseId";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
-    [self.pictures removeAllObjects];
-    self.pictures = nil;
+    [self.picturesArray removeAllObjects];
+    self.picturesArray = nil;
 }
 
 #pragma mark - UICollectionView Delegate methods
@@ -49,7 +50,7 @@ NSString *const cellId = @"collectionCellReuseId";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = (UICollectionViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    HeroCollectionViewCell *cell = (HeroCollectionViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
 
     // from: http://stackoverflow.com/a/24884921/4883632
     CGFloat hue = ( arc4random() % 256 / 256.0 ); // 0.0 to 1.0
@@ -65,13 +66,12 @@ NSString *const cellId = @"collectionCellReuseId";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    if (cell.selected) {
-        cell.selected = YES;
+    if (cell.selected)
+    {
         NSLog(@"Selected cell #%ld", (long)indexPath.row);
     }
-
-    // Move the item to the end of the collectionview
 }
+
 
 
 @end
