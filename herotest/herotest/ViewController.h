@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSInteger const kNumberOfCells;
+
+
 @interface ViewController : UIViewController
 
 
