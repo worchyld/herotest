@@ -25,16 +25,7 @@ NSString *const cellId = @"collectionCellReuseId";
 
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(100, 100);
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flowLayout.minimumInteritemSpacing = 20.0f;
-    flowLayout.minimumLineSpacing = 10.0f;
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 0);
-    flowLayout.headerReferenceSize = CGSizeZero;
-
-    [self.collectionView setCollectionViewLayout:flowLayout];
+    self.collectionView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,23 +51,12 @@ NSString *const cellId = @"collectionCellReuseId";
 {
     UICollectionViewCell *cell = (UICollectionViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
 
-    NSInteger item = (arc4random() %10) + 4;
-
-    switch (item)
-    {
-        case 1:
-            cell.backgroundColor = [UIColor redColor];
-            break;
-        case 2:
-            cell.backgroundColor = [UIColor yellowColor];
-            break;
-        case 3:
-            cell.backgroundColor = [UIColor blackColor];
-            break;
-        default:
-            cell.backgroundColor = [UIColor blueColor];
-            break;
-    }
+    // from: http://stackoverflow.com/a/24884921/4883632
+    CGFloat hue = ( arc4random() % 256 / 256.0 ); // 0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5; // 0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5; // 0.5 to 1.0, away from black
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    cell.backgroundColor = color;
 
     return cell;
 }
@@ -87,6 +67,7 @@ NSString *const cellId = @"collectionCellReuseId";
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     if (cell.selected) {
         cell.selected = YES;
+        NSLog(@"Selected cell #%ld", (long)indexPath.row);
     }
 
     // Move the item to the end of the collectionview

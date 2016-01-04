@@ -18,16 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RSW-gs-42g">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gWF-rX-5DX">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="V0K-IQ-lv0">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="98j-li-T3C">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCellReuseId" id="Dsy-Zp-0VM">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCellReuseId" id="dni-GW-JaL">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -37,18 +37,22 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="qbL-9D-gaX"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="mdH-Rh-lwd"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RSW-gs-42g" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="GZB-Jy-88Y"/>
-                            <constraint firstItem="RSW-gs-42g" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="Jgy-A0-2U1"/>
-                            <constraint firstItem="RSW-gs-42g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="d7J-Dl-LOl"/>
-                            <constraint firstItem="RSW-gs-42g" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="sa7-Xs-dg0"/>
+                            <constraint firstItem="gWF-rX-5DX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="Biy-Ag-PkQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gWF-rX-5DX" secondAttribute="bottom" id="KKf-Q5-sfD"/>
+                            <constraint firstItem="gWF-rX-5DX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="MOK-qm-AwY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gWF-rX-5DX" secondAttribute="trailing" constant="-20" id="zBG-QJ-CWu"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="RSW-gs-42g" id="gGP-vL-ppc"/>
+                        <outlet property="collectionView" destination="gWF-rX-5DX" id="hWO-uV-GLY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
