@@ -14,6 +14,7 @@
 		4D79FF911C3AC0ED007A7E01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D79FF901C3AC0ED007A7E01 /* Assets.xcassets */; };
 		4D79FF941C3AC0ED007A7E01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D79FF921C3AC0ED007A7E01 /* LaunchScreen.storyboard */; };
 		4D79FFA11C3ACBD0007A7E01 /* HeroCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D79FFA01C3ACBD0007A7E01 /* HeroCollectionViewCell.m */; };
+		4D79FFA41C3ACFCA007A7E01 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D79FFA31C3ACFCA007A7E01 /* ImageDownloader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		4D79FF951C3AC0ED007A7E01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D79FF9F1C3ACBD0007A7E01 /* HeroCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroCollectionViewCell.h; sourceTree = "<group>"; };
 		4D79FFA01C3ACBD0007A7E01 /* HeroCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroCollectionViewCell.m; sourceTree = "<group>"; };
+		4D79FFA21C3ACFCA007A7E01 /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
+		4D79FFA31C3ACFCA007A7E01 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,8 @@
 				4D79FF881C3AC0ED007A7E01 /* AppDelegate.m */,
 				4D79FF8A1C3AC0ED007A7E01 /* ViewController.h */,
 				4D79FF8B1C3AC0ED007A7E01 /* ViewController.m */,
+				4D79FFA21C3ACFCA007A7E01 /* ImageDownloader.h */,
+				4D79FFA31C3ACFCA007A7E01 /* ImageDownloader.m */,
 				4D79FF9F1C3ACBD0007A7E01 /* HeroCollectionViewCell.h */,
 				4D79FFA01C3ACBD0007A7E01 /* HeroCollectionViewCell.m */,
 				4D79FF8D1C3AC0ED007A7E01 /* Main.storyboard */,
@@ -156,6 +161,7 @@
 			files = (
 				4D79FFA11C3ACBD0007A7E01 /* HeroCollectionViewCell.m in Sources */,
 				4D79FF8C1C3AC0ED007A7E01 /* ViewController.m in Sources */,
+				4D79FFA41C3ACFCA007A7E01 /* ImageDownloader.m in Sources */,
 				4D79FF891C3AC0ED007A7E01 /* AppDelegate.m in Sources */,
 				4D79FF861C3AC0ED007A7E01 /* main.m in Sources */,
 			);

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "HeroCollectionViewCell.h"
+#import "ImageDownloader.h"
 
 NSInteger const kNumberOfCells = 10;
 NSString *const cellId = @"collectionCellReuseId";
@@ -27,6 +28,10 @@ NSString *const cellId = @"collectionCellReuseId";
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor clearColor];
+
+    // Initial test to see if URL consumption is working
+    ImageDownloader *imageDownloaderObj = [[ImageDownloader alloc] init];
+    [imageDownloaderObj downloadPlaceholder];
 }
 
 - (void)didReceiveMemoryWarning {
