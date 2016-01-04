@@ -33,8 +33,22 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="din-lg-5jI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="din-lg-5jI" firstAttribute="leading" secondItem="dni-GW-JaL" secondAttribute="leadingMargin" constant="-8" id="50a-oK-Rkr"/>
+                                            <constraint firstItem="din-lg-5jI" firstAttribute="width" secondItem="dni-GW-JaL" secondAttribute="width" id="BY0-hZ-AFc"/>
+                                            <constraint firstItem="din-lg-5jI" firstAttribute="height" secondItem="dni-GW-JaL" secondAttribute="height" id="Fcg-5P-csm"/>
+                                            <constraint firstItem="din-lg-5jI" firstAttribute="top" secondItem="dni-GW-JaL" secondAttribute="topMargin" constant="-8" id="cWi-69-lH9"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="din-lg-5jI" id="xMc-pG-382"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
