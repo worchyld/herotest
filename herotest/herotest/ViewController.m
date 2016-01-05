@@ -8,10 +8,12 @@
 
 #import "ViewController.h"
 #import "HeroCollectionViewCell.h"
-#import "ImageDownloader.h"
+#import "Box.h"
 
 NSInteger const kNumberOfCells = 10;
 NSString *const cellId = @"collectionCellReuseId";
+NSString *const kUrlString = @"https://placeholdit.imgix.net/~text?txtsize=20&txt=100%C3%97100&w=100&h=100";
+
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -29,9 +31,12 @@ NSString *const cellId = @"collectionCellReuseId";
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor clearColor];
 
-    // Initial test to see if URL consumption is working
-    ImageDownloader *imageDownloaderObj = [[ImageDownloader alloc] init];
-    [imageDownloaderObj downloadPlaceholder];
+    for (int i=0; i<kNumberOfCells; i++)
+    {
+        Box *box = [[Box alloc] init];
+        [self.picturesArray addObject:box];
+        box = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,15 +62,10 @@ NSString *const cellId = @"collectionCellReuseId";
 {
     HeroCollectionViewCell *cell = (HeroCollectionViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
 
-    // from: http://stackoverflow.com/a/24884921/4883632
-    CGFloat hue = ( arc4random() % 256 / 256.0 ); // 0.0 to 1.0
-    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5; // 0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5; // 0.5 to 1.0, away from black
-    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-    cell.backgroundColor = color;
+    Box *box = self.picturesArray[indexPath.row];
+    cell.backgroundColor = box.bgColor;
 
-    NSString *urlString = @"https://placeholdit.imgix.net/~text?txtsize=20&txt=100%C3%97100&w=100&h=100";
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [NSURL URLWithString:kUrlString];
 
     // Block variable to be assigned in block.
     __block NSData *imageData;
@@ -80,10 +80,12 @@ NSString *const cellId = @"collectionCellReuseId";
 
             // Update UI on main thread
             dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [cell.imageView setImage:imageLoad];
+                
+                cell.imageView.image = imageLoad;
             });
         }
     });
+
 
     return cell;
 }
