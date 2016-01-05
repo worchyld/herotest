@@ -1,5 +1,5 @@
 //
-//  Box.h
+//  ImageDownloader.h
 //  herotest
 //
 //  Created by Amarjit on 05/01/2016.
@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface Box : NSObject
+extern NSString *const kUrlString;
 
-@property (nonatomic, strong) UIColor *bgColor;
-@property (nonatomic, strong) UIImage *image;
+@interface ImageDownloader : NSObject
+
++ (instancetype)sharedClient;
++ (UIImage *) downloadImage;
 
 @end

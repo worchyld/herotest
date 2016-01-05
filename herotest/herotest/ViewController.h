@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 extern NSInteger const kNumberOfCells;
-extern NSString *const kUrlString;
 
 @interface ViewController : UIViewController
 

@@ -9,10 +9,10 @@
 #import "ViewController.h"
 #import "HeroCollectionViewCell.h"
 #import "Box.h"
+#import "ImageDownloader.h"
 
 NSInteger const kNumberOfCells = 10;
 NSString *const cellId = @"collectionCellReuseId";
-NSString *const kUrlString = @"https://placeholdit.imgix.net/~text?txtsize=20&txt=100%C3%97100&w=100&h=100";
 
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -63,29 +63,9 @@ NSString *const kUrlString = @"https://placeholdit.imgix.net/~text?txtsize=20&tx
     HeroCollectionViewCell *cell = (HeroCollectionViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
 
     Box *box = self.picturesArray[indexPath.row];
+
     cell.backgroundColor = box.bgColor;
-
-    NSURL *url = [NSURL URLWithString:kUrlString];
-
-    // Block variable to be assigned in block.
-    __block NSData *imageData;
-    dispatch_queue_t backgroundQueue  = dispatch_queue_create("imagegrabber.bgqueue", NULL);
-
-    // Dispatch a background thread for download
-    dispatch_async(backgroundQueue, ^(void) {
-        imageData = [NSData dataWithContentsOfURL:url];
-        if (imageData.length >0)
-        {
-            UIImage *imageLoad = [[UIImage alloc] initWithData:imageData];
-
-            // Update UI on main thread
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                
-                cell.imageView.image = imageLoad;
-            });
-        }
-    });
-
+    cell.imageView.image = box.image;
 
     return cell;
 }
