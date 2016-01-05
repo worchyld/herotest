@@ -125,11 +125,6 @@ static const CGFloat kFadeInAnimationDelta = 1.5f;
             [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 
         } completion:^(BOOL finished) {
-            if (finished == YES)
-            {
-                // Not sure if this is needed, probably not
-                //[self.collectionView reloadData];
-            }
         }];
 
     }
