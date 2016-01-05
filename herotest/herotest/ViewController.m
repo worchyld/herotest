@@ -74,12 +74,15 @@ NSString *const cellId = @"collectionCellReuseId";
     // Dispatch a background thread for download
     dispatch_async(backgroundQueue, ^(void) {
         imageData = [NSData dataWithContentsOfURL:url];
-        UIImage *imageLoad = [[UIImage alloc] initWithData:imageData];
+        if (imageData.length >0)
+        {
+            UIImage *imageLoad = [[UIImage alloc] initWithData:imageData];
 
-        // Update UI on main thread
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [cell.imageView setImage:imageLoad];
-        });
+            // Update UI on main thread
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [cell.imageView setImage:imageLoad];
+            });
+        }
     });
 
     return cell;
