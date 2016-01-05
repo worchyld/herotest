@@ -64,15 +64,21 @@ NSString *const cellId = @"collectionCellReuseId";
     UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
     cell.backgroundColor = color;
 
-    dispatch_queue_t q = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-    dispatch_async(q, ^{
-        /* Fetch the image from the server... */
-        NSString *urlString = @"https://placeholdit.imgix.net/~text?txtsize=20&txt=100%C3%97100&w=100&h=100";
-        NSURL *url = [NSURL URLWithString:urlString];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        UIImage *img = [[UIImage alloc] initWithData:data];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [cell.imageView setImage:img];
+    NSString *urlString = @"https://placeholdit.imgix.net/~text?txtsize=20&txt=100%C3%97100&w=100&h=100";
+    NSURL *url = [NSURL URLWithString:urlString];
+
+    // Block variable to be assigned in block.
+    __block NSData *imageData;
+    dispatch_queue_t backgroundQueue  = dispatch_queue_create("imagegrabber.bgqueue", NULL);
+
+    // Dispatch a background thread for download
+    dispatch_async(backgroundQueue, ^(void) {
+        imageData = [NSData dataWithContentsOfURL:url];
+        UIImage *imageLoad = [[UIImage alloc] initWithData:imageData];
+
+        // Update UI on main thread
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [cell.imageView setImage:imageLoad];
         });
     });
 
