@@ -34,7 +34,6 @@ NSString *const cellId = @"collectionCellReuseId";
     for (int i=0; i<kNumberOfCells; i++)
     {
         Box *box = [[Box alloc] init];
-        box.image = [[ImageDownloader sharedClient] downloadImage];
         [self.picturesArray addObject:box];
         box = nil;
     }
@@ -64,9 +63,33 @@ NSString *const cellId = @"collectionCellReuseId";
     HeroCollectionViewCell *cell = (HeroCollectionViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
 
     Box *box = self.picturesArray[indexPath.row];
-
+    
     cell.backgroundColor = box.bgColor;
-    cell.imageView.image = box.image;
+
+
+    NSURL *url = [NSURL URLWithString:kUrlString];
+
+    // Block variable to be assigned in block.
+    __block NSData *imageData;
+
+    dispatch_queue_t backgroundQueue  = dispatch_queue_create("imagegrabber.bgqueue", NULL);
+
+    // Dispatch a background thread for download
+    dispatch_async(backgroundQueue, ^(void) {
+        imageData = [NSData dataWithContentsOfURL:url];
+        if (imageData.length >0)
+        {
+            UIImage *image  = [[UIImage alloc] initWithData:imageData];
+
+            // Update UI on main thread
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+
+                
+
+                cell.imageView.image = image;
+            });
+        }
+    });
 
     return cell;
 }
