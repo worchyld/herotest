@@ -82,11 +82,23 @@ NSString *const cellId = @"collectionCellReuseId";
             UIImage *image  = [[UIImage alloc] initWithData:imageData];
 
             // Update UI on main thread
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-
-                
-
+            dispatch_async(dispatch_get_main_queue(), ^(void)
+            {
                 cell.imageView.image = image;
+
+                // Animate imageview setup
+                [UIView animateWithDuration:0.5f animations:^{
+                    cell.imageView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    if (finished == YES)
+                    {
+                        // Fade in
+                        [UIView animateWithDuration:1.5f animations:^{
+                            cell.imageView.alpha = 1;
+                        } completion:^(BOOL finished) {
+                        }];
+                    }
+                }];
             });
         }
     });
