@@ -14,3 +14,10 @@ can no longer fit on remaining row.
 7. Tapping on a box will remove it from its current position and add it to the end.
 8. No empty spaces should be left once a box is removed and placed at the end.
 9. All boxes should animate into their current position.
+
+GIF Demo
+
+
+[[https://dl.dropboxusercontent.com/u/61196723/wuigq.gif
+]]
+
