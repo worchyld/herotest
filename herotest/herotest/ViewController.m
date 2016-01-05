@@ -125,6 +125,10 @@ static const CGFloat kFadeInAnimationDelta = 1.5f;
             [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 
         } completion:^(BOOL finished) {
+            if (finished == YES)
+            {
+             
+            }
         }];
 
     }
