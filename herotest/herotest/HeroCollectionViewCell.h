@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Box.h"
 
 @interface HeroCollectionViewCell : UICollectionViewCell
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+-(void) initializeWithBox:(Box*)box;
+
 @end
