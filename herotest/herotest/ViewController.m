@@ -109,10 +109,27 @@ NSString *const cellId = @"collectionCellReuseId";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    __weak UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath]; // Avoid retain cycles
     if (cell.selected)
     {
         NSLog(@"Selected cell #%ld", (long)indexPath.row);
+
+        [self.collectionView performBatchUpdates:^{
+            for (NSInteger i = 0; i < kNumberOfCells; i++)
+            {
+                NSIndexPath *fromIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+
+                NSInteger j = [self.picturesArray indexOfObject:self.picturesArray[i]];
+                NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:j inSection:0];
+
+                [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+            }
+        } completion:^(BOOL finished) {
+            if (finished == YES) {
+                [self.collectionView reloadData];
+            }
+        }];
+
     }
 }
 
