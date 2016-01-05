@@ -34,6 +34,7 @@ NSString *const cellId = @"collectionCellReuseId";
     for (int i=0; i<kNumberOfCells; i++)
     {
         Box *box = [[Box alloc] init];
+        box.image = [[ImageDownloader sharedClient] downloadImage];
         [self.picturesArray addObject:box];
         box = nil;
     }

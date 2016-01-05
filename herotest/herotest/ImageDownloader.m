@@ -27,7 +27,7 @@ static ImageDownloader *_sharedClient = nil;
     return _sharedClient;
 }
 
-+(UIImage *) downloadImage
+-(UIImage *) downloadImage
 {
     NSURL *url = [NSURL URLWithString:kUrlString];
 

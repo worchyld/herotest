@@ -14,6 +14,6 @@ extern NSString *const kUrlString;
 @interface ImageDownloader : NSObject
 
 + (instancetype)sharedClient;
-+ (UIImage *) downloadImage;
+-(UIImage *) downloadImage;
 
 @end
