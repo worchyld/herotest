@@ -17,6 +17,4 @@ can no longer fit on remaining row.
 
 GIF Demo
 
-
-[[https://dl.dropboxusercontent.com/u/61196723/wuigq.gif]]
-
+![Demo](https://dl.dropboxusercontent.com/u/61196723/wuigq.gif)
