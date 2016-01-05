@@ -14,6 +14,8 @@
 NSInteger const kNumberOfCells = 10;
 NSString *const cellId = @"collectionCellReuseId";
 
+static const CGFloat kInitialAnimationDelta = 0.5f;
+static const CGFloat kFadeInAnimationDelta = 1.5f;
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -66,7 +68,8 @@ NSString *const cellId = @"collectionCellReuseId";
     
     cell.backgroundColor = box.bgColor;
 
-
+    // Download images on a background thread
+    // Did attempt to seperate this onto an ImageDownloader class, but it didn't seem to work correctly
     NSURL *url = [NSURL URLWithString:kUrlString];
 
     // Block variable to be assigned in block.
@@ -77,7 +80,7 @@ NSString *const cellId = @"collectionCellReuseId";
     // Dispatch a background thread for download
     dispatch_async(backgroundQueue, ^(void) {
         imageData = [NSData dataWithContentsOfURL:url];
-        if (imageData.length >0)
+        if (imageData.length > 0)
         {
             UIImage *image  = [[UIImage alloc] initWithData:imageData];
 
@@ -87,15 +90,14 @@ NSString *const cellId = @"collectionCellReuseId";
                 cell.imageView.image = image;
 
                 // Animate imageview setup
-                [UIView animateWithDuration:0.5f animations:^{
+                [UIView animateWithDuration:kInitialAnimationDelta animations:^{
                     cell.imageView.alpha = 0;
                 } completion:^(BOOL finished) {
                     if (finished == YES)
                     {
-                        // Fade in
-                        [UIView animateWithDuration:1.5f animations:^{
+                        // Fade in animation
+                        [UIView animateWithDuration:kFadeInAnimationDelta animations:^{
                             cell.imageView.alpha = 1;
-                        } completion:^(BOOL finished) {
                         }];
                     }
                 }];
@@ -106,7 +108,6 @@ NSString *const cellId = @"collectionCellReuseId";
     return cell;
 }
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     __weak UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath]; // Avoid retain cycles
@@ -115,18 +116,19 @@ NSString *const cellId = @"collectionCellReuseId";
         NSLog(@"Selected cell #%ld", (long)indexPath.row);
 
         [self.collectionView performBatchUpdates:^{
-            for (NSInteger i = 0; i < kNumberOfCells; i++)
-            {
-                NSIndexPath *fromIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
 
-                NSInteger j = [self.picturesArray indexOfObject:self.picturesArray[i]];
-                NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:j inSection:0];
+            NSInteger lastObjectIndex = [self.picturesArray indexOfObject:self.picturesArray.lastObject];
 
-                [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
-            }
+            NSIndexPath *fromIndexPath = indexPath;
+            NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:lastObjectIndex inSection:0];
+
+            [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+
         } completion:^(BOOL finished) {
-            if (finished == YES) {
-                [self.collectionView reloadData];
+            if (finished == YES)
+            {
+                // Not sure if this is needed, probably not
+                //[self.collectionView reloadData];
             }
         }];
 
